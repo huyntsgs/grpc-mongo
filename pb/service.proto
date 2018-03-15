@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package products;
+
+import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+
+message User {
+	bytes ID    = 1       [(gogoproto.moretags)="bson:\"_id\""];
+	string Name   = 2;
+	string Pass      = 3;
+	int32 Role     = 4;
+	string CreatedDate = 5;
+}
+
+message LoginRes {
+	int32 ErrCode = 1;
+	User UserInfo = 2;
+}
+
+message Item {
+	 bytes ID = 1   [(gogoproto.moretags)="bson:\"_id\""];
+	 int32 IdCat = 2;
+	 string CusName = 3;
+	 string Model = 4;
+	 string Note = 5;
+	 string Address = 6;
+	 string Mobile = 7;
+	 int32 Status = 8;
+	 string Adder = 9;
+	 string Executor = 10;
+	 google.protobuf.Timestamp CreatedDate = 11 [(gogoproto.nullable) = true];
+	 google.protobuf.Timestamp ActionDate = 12 [(gogoproto.nullable) = true];
+}
+
+message ProductReq{
+	int32 IdCat = 1;
+	int32 Limit = 2;
+	int32 Offset = 3;
+}
+message ProductRes{
+	int32 ErrCode = 1;
+	repeated Item Items = 2;
+}
+
+service ProductService {
+	rpc GetProducts(ProductReq) returns (ProductRes){		
+		option (google.api.http) = {
+			post: "/auth/getProducts/{IdCat}/{Limit}/{Offset}"
+		};
+	}
+}
+service UserService {
+	rpc Login(User) returns (LoginRes){		
+		option (google.api.http) = {
+			post: "/auth/Login/{Name}/{Pass}"
+		};
+	}
+}
