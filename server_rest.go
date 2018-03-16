@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	servertEndpoint = flag.String("server_endpoint", ":8080", "endpoint of Product service")
+	servertEndpoint = flag.String("server_endpoint", ":8081", "endpoint of Product service")
 )
 
 func RunEndPoint(address string, opts ...runtime.ServeMuxOption) error {
