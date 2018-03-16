@@ -40,7 +40,7 @@ func main() {
 	flag.Parse()
 	defer glog.Flush()
 
-	if err := RunEndPoint(":8080"); err != nil {
+	if err := RunEndPoint(":8081"); err != nil {
 		glog.Fatal(err)
 	}
 }
