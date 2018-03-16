@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	servertEndpoint = flag.String("server_endpoint", ":8081", "endpoint of Product service")
+	servertEndpoint = flag.String("server_endpoint", ":8080", "endpoint of Product service")
 )
 
 func RunEndPoint(address string, opts ...runtime.ServeMuxOption) error {
@@ -40,7 +40,7 @@ func main() {
 	flag.Parse()
 	defer glog.Flush()
 
-	if err := RunEndPoint(":8081"); err != nil {
+	if err := RunEndPoint(":8080"); err != nil {
 		glog.Fatal(err)
 	}
 }
